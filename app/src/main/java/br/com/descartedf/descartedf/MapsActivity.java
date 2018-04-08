@@ -103,7 +103,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
 
+    protected void onStart() {
+
+        super.onStart();
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -197,5 +201,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             });
             alertDialog.show();
         }
+    }
+
+    protected void onRestart() {
+
+        super.onRestart();
     }
 }
