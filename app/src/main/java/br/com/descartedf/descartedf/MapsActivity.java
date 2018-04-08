@@ -117,9 +117,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
                         String str = addressList.get(0).getLocality();
                         MarkerOptions markerOptions = new MarkerOptions();
-                        mMap.addMarker(new MarkerOptions().position(latLng).title("Você está aqui"));
+                        mMap.addMarker(new MarkerOptions()
+                                       .position(latLng).title("Você está aqui")
+                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.localatual)));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.localatual));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
