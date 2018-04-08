@@ -1,7 +1,8 @@
-package br.com.descartedf.descartedf;
+package com.example.arthurwallace.gps_maps;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,20 +11,26 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -38,54 +45,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //TAGUATINGA
         LatLng jarjourTaguatinga = new LatLng(-15.839957, -48.050569);
-        mMap.addMarker(new MarkerOptions().position(jarjourTaguatinga).title("Posto Jarjour"));
+        mMap.addMarker(new MarkerOptions().position(jarjourTaguatinga).title("Posto Jarjour").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jarjourTaguatinga, zoomLevel));
+        MarkerOptions markerOptions = new MarkerOptions();
+
 
         //SOBRADINHO
         LatLng informaticaJunior = new LatLng(-15.691507, -47.825692);
-        mMap.addMarker(new MarkerOptions().position(informaticaJunior).title("Informática do Junior"));
+        mMap.addMarker(new MarkerOptions().position(informaticaJunior).title("Informática do Junior").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(informaticaJunior, zoomLevel));
 
         //ASA SUL
         LatLng marista = new LatLng(-15.825287, -47.899272);
-        mMap.addMarker(new MarkerOptions().position(marista).title("Colégio Maristinha de Brasília"));
+        mMap.addMarker(new MarkerOptions().position(marista).title("Colégio Maristinha de Brasília").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marista, zoomLevel));
 
         LatLng anoes = new LatLng(-15.825743, -47.922801);
-        mMap.addMarker(new MarkerOptions().position(anoes).title("Posto dos Anões"));
+        mMap.addMarker(new MarkerOptions().position(anoes).title("Posto dos Anões").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(anoes, zoomLevel));
 
         LatLng jarjourAsaSul = new LatLng(-15.820127, -47.908312);
-        mMap.addMarker(new MarkerOptions().position(jarjourAsaSul).title("Posto Jarjour"));
+        mMap.addMarker(new MarkerOptions().position(jarjourAsaSul).title("Posto Jarjour").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jarjourAsaSul, zoomLevel));
 
         LatLng impConcursos = new LatLng(-15.811537, -47.883919);
-        mMap.addMarker(new MarkerOptions().position(impConcursos).title("IMP Concursos"));
+        mMap.addMarker(new MarkerOptions().position(impConcursos).title("IMP Concursos").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(impConcursos, zoomLevel));
 
         LatLng brasasEnglishAsaSul = new LatLng(-15.821290, -47.910395);
-        mMap.addMarker(new MarkerOptions().position(brasasEnglishAsaSul).title("Brasas English"));
+        mMap.addMarker(new MarkerOptions().position(brasasEnglishAsaSul).title("Brasas English").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(brasasEnglishAsaSul, zoomLevel));
 
         LatLng clubeCoat = new LatLng(-15.817215, -47.874181);
-        mMap.addMarker(new MarkerOptions().position(clubeCoat).title("Academia Clube Coat"));
+        mMap.addMarker(new MarkerOptions().position(clubeCoat).title("Academia Clube Coat").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(clubeCoat, zoomLevel));
 
         // ASA NORTE
         LatLng laBoutique = new LatLng(-15.747372, -47.884524);
-        mMap.addMarker(new MarkerOptions().position(laBoutique).title("Padaria La Boutique"));
+        mMap.addMarker(new MarkerOptions().position(laBoutique).title("Padaria La Boutique").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(laBoutique, zoomLevel));
 
         LatLng jarjourAsaNorte = new LatLng(-15.768320, -47.881765);
-        mMap.addMarker(new MarkerOptions().position(jarjourAsaNorte).title("Posto Jarjour"));
+        mMap.addMarker(new MarkerOptions().position(jarjourAsaNorte).title("Posto Jarjour").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jarjourAsaNorte, zoomLevel));
 
         LatLng restauraCar = new LatLng(-15.782655, -47.884365);
-        mMap.addMarker(new MarkerOptions().position(restauraCar).title("RestauraCar"));
+        mMap.addMarker(new MarkerOptions().position(restauraCar).title("RestauraCar").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(restauraCar, zoomLevel));
 
         LatLng brasasEnglishAsaNorte = new LatLng(-15.750847, -47.885664);
-        mMap.addMarker(new MarkerOptions().position(brasasEnglishAsaNorte).title("Brasas English"));
+        mMap.addMarker(new MarkerOptions().position(brasasEnglishAsaNorte).title("Brasas English").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(brasasEnglishAsaNorte, zoomLevel));
     }
 
