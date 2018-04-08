@@ -1,12 +1,16 @@
 package br.com.descartedf.descartedf;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -118,8 +122,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String str = addressList.get(0).getLocality();
                         MarkerOptions markerOptions = new MarkerOptions();
                         mMap.addMarker(new MarkerOptions()
-                                       .position(latLng).title("Você está aqui")
-                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.localatual)));
+                                .position(latLng).title("Você está aqui")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.localatual)));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -176,8 +180,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
             );
+        } else {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("GPS desativado!");
+            alertDialog.setMessage("Ativar GPS?");
+            alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            alertDialog.show();
         }
     }
 }
-
-
